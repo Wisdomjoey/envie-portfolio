@@ -45,7 +45,7 @@ const Assignments = () => {
       size: formatFileSize(file.size),
       file: file
     }));
-    
+    console.log(newAssignments)
     setAssignments(prev => [...prev, ...newAssignments]);
   };
 
