@@ -73,28 +73,22 @@ const Assignments = () => {
   };
 
   useEffect(() => {
-    const filePath = './OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
+    const filePath = "/OBAMOH MODUPE - ASSIGNMENT 1.docx"; // Replace with the actual file path
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', filePath, true);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(filePath)
 
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const fileData = xhr.response;
-        const blob = new Blob([fileData], { type: 'application/octet-stream' });
-        const file = new File([blob], filePath, { type: 'application/octet-stream' });
+        if (!res.ok) return console.log('Couldnt fetch file')
+
+        const blob = await res.blob()
+        const file = new File([blob], 'Modupe Obamah Rejoice - Assignment 1', {type: blob.type})
 
         handleFiles([file])
-      } else {
-        console.error(`Failed to load file. Status: ${xhr.status}`);
+      } catch (error) {
+        console.log('Something went wrong')
       }
-    };
-
-    xhr.onerror = () => {
-      console.error('Network error occurred during file loading.');
-    };
-
-    xhr.send();
+    }
   }, []);
 
   return (
