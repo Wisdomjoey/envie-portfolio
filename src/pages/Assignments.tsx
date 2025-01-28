@@ -82,9 +82,8 @@ const Assignments = () => {
         if (!res.ok) return console.log('Couldnt fetch file')
 
         const blob = await res.blob()
-        const file = new Blob([blob], 'Modupe Obamah Rejoice - Assignment 1', {type: blob.type})
-
-        handleFiles([file])
+        console.log(blob)
+        handleFiles([blob])
       } catch (error) {
         console.error(error)
         console.log('Something went wrong')
