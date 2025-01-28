@@ -86,6 +86,7 @@ const Assignments = () => {
 
         handleFiles([file])
       } catch (error) {
+        console.error(error)
         console.log('Something went wrong')
       }
     }
