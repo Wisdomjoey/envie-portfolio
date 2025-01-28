@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Upload, File, Trash2, Plus, Download } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Upload, File as FileIcon, Trash2, Plus, Download } from "lucide-react";
 
 interface Assignment {
   id: string;
@@ -27,7 +27,7 @@ const Assignments = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     handleFiles(files);
   };
@@ -43,27 +43,27 @@ const Assignments = () => {
       name: (names ?? [])[ind] ?? file.name,
       date: new Date().toLocaleDateString(),
       size: formatFileSize(file.size),
-      file: file
+      file: file,
     }));
 
-    setAssignments(prev => [...prev, ...newAssignments]);
+    setAssignments((prev) => [...prev, ...newAssignments]);
   };
 
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
   const removeAssignment = (id: string) => {
-    setAssignments(prev => prev.filter(assignment => assignment.id !== id));
+    setAssignments((prev) => prev.filter((assignment) => assignment.id !== id));
   };
 
   const downloadAssignment = (assignment: Assignment) => {
     const url = URL.createObjectURL(assignment.file);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = assignment.name;
     document.body.appendChild(a);
@@ -73,24 +73,28 @@ const Assignments = () => {
   };
 
   useEffect(() => {
-    const filePath = "https://envie-portfolio.vercel.app/OBAMOH MODUPE - ASSIGNMENT 1.docx"; // Replace with the actual file path
+    const filePath =
+      "https://envie-portfolio.vercel.app/OBAMOH MODUPE - ASSIGNMENT 1.docx"; // Replace with the actual file path
 
     const fetchData = async () => {
       try {
-        const res = await fetch(filePath)
+        const res = await fetch(filePath);
 
-        if (!res.ok) return console.log('Couldnt fetch file')
+        if (!res.ok) return console.log("Couldnt fetch file");
 
-        const blob = await res.blob()
+        const blob = await res.blob();
+        const file = new File([blob], "OBAMOH MODUPE - ASSIGNMENT 1.docx", {
+          type: blob.type,
+        });
 
-        handleFiles([blob], ['OBAMOH MODUPE - ASSIGNMENT 1.docx'])
+        handleFiles([file]);
       } catch (error) {
-        console.error(error)
-        console.log('Something went wrong')
+        console.error(error);
+        console.log("Something went wrong");
       }
-    }
+    };
 
-    fetchData()
+    fetchData();
   }, []);
 
   return (
@@ -108,7 +112,7 @@ const Assignments = () => {
 
       <div
         className={`glass rounded-2xl p-12 mb-8 text-center ${
-          dragActive && 'ring-2 ring-indigo-500'
+          dragActive && "ring-2 ring-indigo-500"
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -147,19 +151,21 @@ const Assignments = () => {
               Uploaded Assignments
             </h2>
           </div>
-          
+
           <div className="divide-y divide-gray-200 dark:divide-gray-700">
-            {assignments.map(assignment => (
+            {assignments.map((assignment) => (
               <div
                 key={assignment.id}
                 className="p-6 flex items-center justify-between hover:bg-white/50 dark:hover:bg-gray-800/50 transition-colors"
               >
                 <div className="flex items-center space-x-4">
                   <div className="p-3 glass rounded-xl">
-                    <File className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                    <FileIcon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                   </div>
                   <div>
-                    <h3 className="font-medium dark:text-white">{assignment.name}</h3>
+                    <h3 className="font-medium dark:text-white">
+                      {assignment.name}
+                    </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       Uploaded on {assignment.date} • {assignment.size}
                     </p>
@@ -173,12 +179,12 @@ const Assignments = () => {
                   >
                     <Download className="w-5 h-5 text-slate-400 group-hover:text-indigo-500 dark:text-slate-500 dark:group-hover:text-indigo-400" />
                   </button>
-                <button
-                  onClick={() => removeAssignment(assignment.id)}
-                  className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 group"
-                >
-                  <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500 dark:text-gray-500 dark:group-hover:text-red-400" />
-                </button>
+                  <button
+                    onClick={() => removeAssignment(assignment.id)}
+                    className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 group"
+                  >
+                    <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500 dark:text-gray-500 dark:group-hover:text-red-400" />
+                  </button>
                 </div>
               </div>
             ))}
