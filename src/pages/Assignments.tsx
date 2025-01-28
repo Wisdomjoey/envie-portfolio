@@ -78,12 +78,12 @@ const Assignments = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(filePath)
-
+console.log(res)
         if (!res.ok) return console.log('Couldnt fetch file')
 
         const blob = await res.blob()
         const file = new File([blob], 'Modupe Obamah Rejoice - Assignment 1', {type: blob.type})
-
+console.log(file)
         handleFiles([file])
       } catch (error) {
         console.log('Something went wrong')
