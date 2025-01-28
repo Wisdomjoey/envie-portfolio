@@ -14,64 +14,61 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     { name: 'Assignments', path: '/assignments' },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      <nav className="bg-white dark:bg-gray-800 shadow-lg transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <Link to="/" className="flex items-center">
-                <span className="text-xl font-bold text-gray-800 dark:text-white">Portfolio</span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden sm:flex sm:items-center space-x-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium ${
-                    isActive(item.path)
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/50'
-                  }`}
-                >
-                  {item.name}
+    <div className="min-h-screen">
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        <div className="glass border-b border-white/20 dark:border-gray-700/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 text-transparent bg-clip-text">
+                  Portfolio
                 </Link>
-              ))}
-              <ThemeToggle />
-            </div>
+              </div>
 
-            {/* Mobile menu button */}
-            <div className="sm:hidden flex items-center space-x-2">
-              <ThemeToggle />
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              {/* Desktop Navigation */}
+              <div className="hidden sm:flex sm:items-center space-x-2">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <div className="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-2" />
+                <ThemeToggle />
+              </div>
+
+              {/* Mobile menu button */}
+              <div className="sm:hidden flex items-center space-x-2">
+                <ThemeToggle />
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-white/10"
+                >
+                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="sm:hidden">
-            <div className="pt-2 pb-3 space-y-1">
+          <div className="sm:hidden glass border-b border-white/20 dark:border-gray-700/30">
+            <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block px-3 py-2 text-base font-medium ${
+                  className={`block px-3 py-2 rounded-lg ${
                     isActive(item.path)
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/50'
+                      ? 'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/50'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -83,7 +80,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         )}
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="pt-16">
         {children}
       </main>
     </div>

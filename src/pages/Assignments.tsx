@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Upload, File, Trash2 } from "lucide-react";
+import React, { useState } from 'react';
+import { Upload, File, Trash2, Plus } from 'lucide-react';
 
 interface Assignment {
   id: string;
@@ -26,7 +26,7 @@ const Assignments = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-
+    
     const files = Array.from(e.dataTransfer.files);
     handleFiles(files);
   };
@@ -37,49 +37,50 @@ const Assignments = () => {
   };
 
   const handleFiles = (files: File[]) => {
-    const newAssignments = files.map((file) => ({
+    const newAssignments = files.map(file => ({
       id: Math.random().toString(36).substr(2, 9),
       name: file.name,
       date: new Date().toLocaleDateString(),
-      size: formatFileSize(file.size),
+      size: formatFileSize(file.size)
     }));
-
-    setAssignments((prev) => [...prev, ...newAssignments]);
+    
+    setAssignments(prev => [...prev, ...newAssignments]);
   };
 
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return "0 Bytes";
+    if (bytes === 0) return '0 Bytes';
     const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
   const removeAssignment = (id: string) => {
-    setAssignments((prev) => prev.filter((assignment) => assignment.id !== id));
+    setAssignments(prev => prev.filter(assignment => assignment.id !== id));
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
-        Assignments
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-3xl mx-auto text-center mb-12">
+        <h1 className="text-4xl font-bold mb-6">
+          <span className="bg-gradient-to-r from-indigo-600 to-pink-600 text-transparent bg-clip-text">
+            Assignments
+          </span>
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300 text-lg">
+          Upload and manage your assignments in one place
+        </p>
+      </div>
 
       <div
-        className={`border-2 border-dashed rounded-lg p-8 mb-8 text-center ${
-          dragActive
-            ? "border-blue-500 bg-blue-50 dark:bg-blue-900/50"
-            : "border-gray-300 dark:border-gray-600"
+        className={`glass rounded-2xl p-12 mb-8 text-center ${
+          dragActive && 'ring-2 ring-indigo-500'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
       >
-        <Upload className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Drag and drop your assignments here, or click to select files
-        </p>
         <input
           type="file"
           multiple
@@ -87,34 +88,44 @@ const Assignments = () => {
           className="hidden"
           id="file-upload"
         />
-        <label
-          htmlFor="file-upload"
-          className="inline-block bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors cursor-pointer"
-        >
-          Select Files
-        </label>
+        <div className="max-w-xl mx-auto">
+          <Upload className="w-16 h-16 mx-auto mb-4 text-indigo-600 dark:text-indigo-400" />
+          <h3 className="text-xl font-semibold mb-2 dark:text-white">
+            Upload Assignments
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            Drag and drop your files here, or click to browse
+          </p>
+          <label
+            htmlFor="file-upload"
+            className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-pink-600 text-white hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            <Plus className="mr-2 h-5 w-5" />
+            Select Files
+          </label>
+        </div>
       </div>
 
       {assignments.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-          <div className="p-4 border-b dark:border-gray-700">
-            <h2 className="text-lg font-semibold dark:text-white">
+        <div className="glass rounded-2xl overflow-hidden">
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold dark:text-white">
               Uploaded Assignments
             </h2>
           </div>
-
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-            {assignments.map((assignment) => (
-              <li
+          
+          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+            {assignments.map(assignment => (
+              <div
                 key={assignment.id}
-                className="p-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="p-6 flex items-center justify-between hover:bg-white/50 dark:hover:bg-gray-800/50 transition-colors"
               >
-                <div className="flex items-center">
-                  <File className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-3" />
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 glass rounded-xl">
+                    <File className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                  </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {assignment.name}
-                    </p>
+                    <h3 className="font-medium dark:text-white">{assignment.name}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       Uploaded on {assignment.date} • {assignment.size}
                     </p>
@@ -122,13 +133,13 @@ const Assignments = () => {
                 </div>
                 <button
                   onClick={() => removeAssignment(assignment.id)}
-                  className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+                  className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 group"
                 >
-                  <Trash2 size={20} />
+                  <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500 dark:text-gray-500 dark:group-hover:text-red-400" />
                 </button>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>

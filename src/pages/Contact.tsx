@@ -1,109 +1,119 @@
-import { Phone, Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Github, Linkedin, Twitter, Send } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
-        Contact Me
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-3xl mx-auto text-center mb-12">
+        <h1 className="text-4xl font-bold mb-6">
+          <span className="bg-gradient-to-r from-indigo-600 to-pink-600 text-transparent bg-clip-text">
+            Get in Touch
+          </span>
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300 text-lg">
+          Let's discuss how we can work together to bring your ideas to life
+        </p>
+      </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-          <h2 className="text-xl font-semibold mb-6 dark:text-white">
-            Contact Information
-          </h2>
-
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <Phone className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" />
-              <span className="text-gray-600 dark:text-gray-300">
-                +234 (916) 395 8534
-              </span>
+        <div className="glass rounded-2xl p-8">
+          <div className="space-y-6">
+            <div className="flex items-center p-4 glass-hover rounded-xl">
+              <Phone className="w-6 h-6 text-indigo-600 dark:text-indigo-400 mr-4" />
+              <div>
+                <h3 className="font-medium dark:text-white">Phone</h3>
+                <p className="text-gray-600 dark:text-gray-300">+234 (916) 395 8534</p>
+              </div>
             </div>
 
-            <div className="flex items-center">
-              <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" />
-              <span className="text-gray-600 dark:text-gray-300">
-                modupeobamoh@gmail.com
-              </span>
+            <div className="flex items-center p-4 glass-hover rounded-xl">
+              <Mail className="w-6 h-6 text-indigo-600 dark:text-indigo-400 mr-4" />
+              <div>
+                <h3 className="font-medium dark:text-white">Email</h3>
+                <p className="text-gray-600 dark:text-gray-300">modupeobamoh@gmail.com</p>
+              </div>
             </div>
 
-            <div className="flex items-center">
-              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" />
-              <span className="text-gray-600 dark:text-gray-300">
-                Lekki Phase 100, Lagos Nigeria
-              </span>
+            <div className="flex items-center p-4 glass-hover rounded-xl">
+              <MapPin className="w-6 h-6 text-indigo-600 dark:text-indigo-400 mr-4" />
+              <div>
+                <h3 className="font-medium dark:text-white">Location</h3>
+                <p className="text-gray-600 dark:text-gray-300">Lekki Phase 100, Lagos Nigeria</p>
+              </div>
             </div>
           </div>
 
           <div className="mt-8">
-            <h3 className="text-lg font-semibold mb-4 dark:text-white">
-              Social Links
-            </h3>
+            <h3 className="text-lg font-semibold mb-4 dark:text-white">Connect</h3>
             <div className="flex space-x-4">
               <a
                 href="https://github.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className="p-3 glass-hover rounded-full"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Github size={20} />
+                <Github className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               </a>
               <a
                 href="https://www.linkedin.com/in/rejoice-obamoh-0384b4187/"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className="p-3 glass-hover rounded-full"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Linkedin size={20} />
+                <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               </a>
               <a
                 href="https://twitter.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className="p-3 glass-hover rounded-full"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Twitter size={20} />
+                <Twitter className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-          <h2 className="text-xl font-semibold mb-6 dark:text-white">
-            Send a Message
-          </h2>
-
-          <form className="space-y-4">
+        <div className="glass rounded-2xl p-8">
+          <form className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Name
               </label>
               <input
                 type="text"
-                className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                className="w-full px-4 py-3 rounded-xl glass-hover border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white"
+                placeholder="Your name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email
               </label>
               <input
                 type="email"
-                className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                className="w-full px-4 py-3 rounded-xl glass-hover border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white"
+                placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Message
               </label>
               <textarea
                 rows={4}
-                className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                className="w-full px-4 py-3 rounded-xl glass-hover border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white"
+                placeholder="Your message"
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              className="w-full inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-pink-600 text-white hover:opacity-90 transition-opacity"
             >
               Send Message
+              <Send className="ml-2 h-5 w-5" />
             </button>
           </form>
         </div>
