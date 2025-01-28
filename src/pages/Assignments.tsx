@@ -37,10 +37,10 @@ const Assignments = () => {
     handleFiles(files);
   };
 
-  const handleFiles = (files: File[]) => {
-    const newAssignments = files.map(file => ({
+  const handleFiles = (files: File[], names: string[]) => {
+    const newAssignments = files.map((file, ind) => ({
       id: Math.random().toString(36).substr(2, 9),
-      name: file.name,
+      name: names[ind] ?? file.name,
       date: new Date().toLocaleDateString(),
       size: formatFileSize(file.size),
       file: file
@@ -82,8 +82,8 @@ const Assignments = () => {
         if (!res.ok) return console.log('Couldnt fetch file')
 
         const blob = await res.blob()
-        console.log(blob)
-        handleFiles([blob])
+
+        handleFiles([blob], ['OBAMOH MODUPE - ASSIGNMENT 1.docx'])
       } catch (error) {
         console.error(error)
         console.log('Something went wrong')
