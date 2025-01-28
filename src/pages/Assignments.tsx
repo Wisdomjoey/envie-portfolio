@@ -75,28 +75,20 @@ const Assignments = () => {
   useEffect(() => {
     const filePath = "https://docs.google.com/document/d/1npRwFKx7Im32_voTsdc14W-Z_FCvj18K/edit?usp=drivesdk&ouid=117585647777057773531&rtpof=true&sd=true"; // Replace with the actual file path
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', filePath, true);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(filePath)
 
-    xhr.responseType = 'blob';
+        if (!res.ok) return console.log('Couldnt fetch file')
 
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const fileData = xhr.response;
-        const blob = xhr.response;
-        const file = new File([blob], 'Modupe Obamah - Assignment 1.docx', { type: blob.type });
+        const blob = await res.blob()
+        const file = new File([blob], 'Modupe Obamah Rejoice - Assignment 1', {type: blob.type})
 
         handleFiles([file])
-      } else {
-        console.error(`Failed to load file. Status: ${xhr.status}`);
+      } catch (error) {
+        console.log('Something went wrong')
       }
-    };
-
-    xhr.onerror = () => {
-      console.error('Network error occurred during file loading.');
-    };
-
-    xhr.send();
+    }
   }, []);
 
   return (
