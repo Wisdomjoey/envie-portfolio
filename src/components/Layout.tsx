@@ -1,17 +1,18 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import React from "react";
+import logo from "../assets/logo.png";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-    { name: 'Assignments', path: '/assignments' },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Assignments", path: "/assignments" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -22,9 +23,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className="glass border-b border-white/20 dark:border-gray-700/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 text-transparent bg-clip-text">
-                  Portfolio
+              <div className="flex items-center h-full py-2">
+                <Link to="/" className="h-full">
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    className="h-full object-contain"
+                  />
                 </Link>
               </div>
 
@@ -34,7 +39,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   <Link
                     key={item.name}
                     to={item.path}
-                    className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
+                    className={`nav-item ${
+                      isActive(item.path) ? "active" : ""
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -67,8 +74,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   to={item.path}
                   className={`block px-3 py-2 rounded-lg ${
                     isActive(item.path)
-                      ? 'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/50'
+                      ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/50"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -80,9 +87,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         )}
       </nav>
 
-      <main className="pt-16">
-        {children}
-      </main>
+      <main className="pt-16">{children}</main>
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Upload, File, Trash2, Plus } from 'lucide-react';
+import { Upload, File, Trash2, Plus, Download } from 'lucide-react';
 
 interface Assignment {
   id: string;
   name: string;
   date: string;
   size: string;
+  file: File;
 }
 
 const Assignments = () => {
@@ -41,7 +42,8 @@ const Assignments = () => {
       id: Math.random().toString(36).substr(2, 9),
       name: file.name,
       date: new Date().toLocaleDateString(),
-      size: formatFileSize(file.size)
+      size: formatFileSize(file.size),
+      file: file
     }));
     
     setAssignments(prev => [...prev, ...newAssignments]);
@@ -57,6 +59,17 @@ const Assignments = () => {
 
   const removeAssignment = (id: string) => {
     setAssignments(prev => prev.filter(assignment => assignment.id !== id));
+  };
+
+  const downloadAssignment = (assignment: Assignment) => {
+    const url = URL.createObjectURL(assignment.file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = assignment.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -131,12 +144,21 @@ const Assignments = () => {
                     </p>
                   </div>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => downloadAssignment(assignment)}
+                    className="p-2 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/50 group"
+                    title="Download"
+                  >
+                    <Download className="w-5 h-5 text-slate-400 group-hover:text-indigo-500 dark:text-slate-500 dark:group-hover:text-indigo-400" />
+                  </button>
                 <button
                   onClick={() => removeAssignment(assignment.id)}
                   className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 group"
                 >
                   <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500 dark:text-gray-500 dark:group-hover:text-red-400" />
                 </button>
+                </div>
               </div>
             ))}
           </div>
