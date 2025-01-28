@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Upload, File, Trash2, Plus, Download } from 'lucide-react';
 
 interface Assignment {
@@ -71,6 +71,31 @@ const Assignments = () => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
+
+  useEffect(() => {
+    const filePath = '../assets/OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', filePath, true);
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const fileData = xhr.response;
+        const blob = new Blob([fileData], { type: 'application/octet-stream' });
+        const file = new File([blob], filePath, { type: 'application/octet-stream' });
+
+        handleFiles([file])
+      } else {
+        console.error(`Failed to load file. Status: ${xhr.status}`);
+      }
+    };
+
+    xhr.onerror = () => {
+      console.error('Network error occurred during file loading.');
+    };
+
+    xhr.send();
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
