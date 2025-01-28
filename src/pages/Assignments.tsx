@@ -73,7 +73,7 @@ const Assignments = () => {
   };
 
   useEffect(() => {
-    const filePath = '../assets/OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
+    const filePath = './src/assets/OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', filePath, true);
