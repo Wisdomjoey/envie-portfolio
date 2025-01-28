@@ -73,17 +73,18 @@ const Assignments = () => {
   };
 
   useEffect(() => {
-    console.log(process.cwd())
-    /*const filePath = process.cwd() + './src/assets/OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
+    const filePath = "https://docs.google.com/document/d/1npRwFKx7Im32_voTsdc14W-Z_FCvj18K/edit?usp=drivesdk&ouid=117585647777057773531&rtpof=true&sd=true"; // Replace with the actual file path
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', filePath, true);
 
+    xhr.responseType = 'blob';
+
     xhr.onload = () => {
       if (xhr.status === 200) {
         const fileData = xhr.response;
-        const blob = new Blob([fileData], { type: 'application/octet-stream' });
-        const file = new File([blob], filePath, { type: 'application/octet-stream' });
+        const blob = xhr.response;
+        const file = new File([blob], 'Modupe Obamah - Assignment 1.docx', { type: blob.type });
 
         handleFiles([file])
       } else {
@@ -95,7 +96,7 @@ const Assignments = () => {
       console.error('Network error occurred during file loading.');
     };
 
-    xhr.send();*/
+    xhr.send();
   }, []);
 
   return (
