@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ass from '../assets/OBAMOH MODUPE - ASSIGNMENT 1.docx';
 import { Upload, File, Trash2, Plus, Download } from 'lucide-react';
 
 interface Assignment {
@@ -73,6 +74,11 @@ const Assignments = () => {
   };
 
   useEffect(() => {
+    console.log(ass)
+    handleFiles([ass])
+  }, [])
+
+  /*useEffect(() => {
     const filePath = './src/assets/OBAMOH MODUPE - ASSIGNMENT 1.docx'; // Replace with the actual file path
 
     const xhr = new XMLHttpRequest();
@@ -95,7 +101,7 @@ const Assignments = () => {
     };
 
     xhr.send();
-  }, []);
+  }, []);*/
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
